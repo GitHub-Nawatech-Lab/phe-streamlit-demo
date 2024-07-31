@@ -4,9 +4,9 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-def get_api_volve(json_data) :
+def get_api_volve(data) :
     try :
-        test_sample = json.dumps(json_data)
+        test_sample = json.dumps(data)
         test_sample = bytes(test_sample,encoding = 'utf8')
 
         # If (key) auth is enabled, don't forget to add key to the HTTP header.
@@ -21,7 +21,7 @@ def get_api_volve(json_data) :
     except Exception as e :
         print("get_api_volve() function get error :", e)
 
-def upload_files() :
+def upload_volve_files() :
     uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
     if uploaded_file is not None :
         try :
@@ -29,23 +29,19 @@ def upload_files() :
             df = pd.read_csv(uploaded_file)
             return df
         except Exception as e :
-            st.error("Invalid JSON format. Please upload a valid JSON file.")
+            st.error("Invalid CSV format. Please upload a valid CSV file.")
 
 def process_volve(df) :
     try :
-        test_json = df.drop(["DATEPRD","BORE_OIL_VOL(t)"], axis=1)
-        test = {"data": test_json.values.tolist()}
+        test_df = df.drop(["DATEPRD","BORE_OIL_VOL(t)"], axis=1)
+        test = {"data": test_df.values.tolist()}
         response = get_api_volve(test)
-        data = {
-            "DATEPRD" : df["DATEPRD"].tolist(),
-            "Actual" : df["BORE_OIL_VOL(t)"].tolist(),
-            "Prediction" : response["result"]
-        }
-        result_df = pd.DataFrame(data)
-        result_df["DATEPRD"] = pd.to_datetime(result_df["DATEPRD"])
-        return result_df
+        df["Actual"] = df["BORE_OIL_VOL(t)"]
+        df["Prediction"] = response["result"]
+        df["DATEPRD"] = pd.to_datetime(df["DATEPRD"])
+        return df
     except Exception as e :
-        print("visualize_volve() function get error :", e)
+        print("process_volve() function get error :", e)
 
 def visualize_volve(df) :
     try :        
@@ -73,9 +69,10 @@ def st_volve() :
         st.title("Volve Production Rate Prediction")
         st.markdown("### ✅ Volve Production Nawatech - PHE")
 
-        data = upload_files()
+        data = upload_volve_files()
         if data is not None :
             df = process_volve(data)
+            df.drop("BORE_OIL_VOL(t)", axis=1, inplace=True)
             if df is not None :
                 # Add a slider for selecting date range
                 start_date = st.date_input("Select start date", min(df['DATEPRD']))
@@ -86,5 +83,6 @@ def st_volve() :
                 # Filter data based on selected date range
                 filtered_df = df[(df['DATEPRD'] >= start_date) & (df['DATEPRD'] <= end_date)]
                 visualize_volve(filtered_df)
+                st.dataframe(filtered_df)
     except Exception as e :
         print("st_volve() function get error :", e)

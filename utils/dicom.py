@@ -69,9 +69,9 @@ def st_dicom() :
         st.title("DICOM Image Visualization")
         st.markdown("### ✅ DICOM Visualization Nawatech - PHE")
 
-        ddr_url = "http://127.0.0.1:8000/process_dicom/ddr/"
-        lung_url = "http://127.0.0.1:8000/process_dicom/lung/"
-        mri_url = "http://127.0.0.1:8000/process_dicom/mri/"
+        ddr_url = "http://127.0.0.1:8080/process_dicom/ddr/"
+        lung_url = "http://127.0.0.1:8080/process_dicom/lung/"
+        mri_url = "http://127.0.0.1:8080/process_dicom/mri/"
 
         selected_option = st.selectbox("Select a DICOM Series", ["DDR", "Lung", "MRI"])
         if selected_option == "DDR" :
