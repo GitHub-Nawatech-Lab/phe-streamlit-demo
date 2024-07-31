@@ -85,4 +85,4 @@ stages:
               azureSubscription: $(azureServiceConnectionId)
               appName: $(webAppName)
               package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
-              startUpCommand: 'streamlit run app.py --server.address=0.0.0.0 --server.port=8000' 
+              startUpCommand: 'python -m streamlit run app.py --server.port 80 --server.address 0.0.0.0' 
