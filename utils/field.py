@@ -114,5 +114,6 @@ def st_field() :
                 plot_confusion_matrix(df["Actual"], df["Prediction"], class_names)
                 plot_class_distribution(df["Actual"], df["Prediction"])
                 st.dataframe(df)
+                print("Field Prediction Done!")
     except Exception as e :
         print("st_field() function get error :", e)

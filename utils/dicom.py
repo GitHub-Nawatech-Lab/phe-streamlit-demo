@@ -69,16 +69,19 @@ def st_dicom() :
         st.title("DICOM Image Visualization")
         st.markdown("### ✅ DICOM Visualization Nawatech - PHE")
 
-        ddr_url = "http://127.0.0.1:8080/process_dicom/ddr/"
-        lung_url = "http://127.0.0.1:8080/process_dicom/lung/"
-        mri_url = "http://127.0.0.1:8080/process_dicom/mri/"
+        ddr_url = "https://demo-phe-dicom.azurewebsites.net/process_dicom/ddr/"
+        lung_url = "https://demo-phe-dicom.azurewebsites.net/process_dicom/lung/"
+        mri_url = "https://demo-phe-dicom.azurewebsites.net/process_dicom/mri/"
 
         selected_option = st.selectbox("Select a DICOM Series", ["DDR", "Lung", "MRI"])
         if selected_option == "DDR" :
             show_dicom(ddr_url, 1985, 53970, 5177)
+            print("DICOM Visualization Done!")
         elif selected_option == "Lung" :
             show_dicom(lung_url, -1024, 3071, 500)
+            print("DICOM Visualization Done!")
         elif selected_option == "MRI" :
             show_dicom(mri_url, 0, 8847, 800)
+            print("DICOM Visualization Done!")
     except Exception as e :
         print("st_dicom() function get error :", e)

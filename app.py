@@ -2,6 +2,7 @@ import streamlit as st
 from utils.dicom import st_dicom
 from utils.volve import st_volve
 from utils.field import st_field
+from utils.seismic import st_seismic
 # from utils import seismic_prediction
 
 def main() :
@@ -33,8 +34,9 @@ def main() :
             st.session_state.last_selected_option = selected_option
 
         if selected_option == "Seismic Holoviz":
-            st.write("Welcome to the Seismic page!")
+            # st.write("Welcome to the Seismic page!")
             # seismic_prediction()
+            st_seismic()
         elif selected_option == "DICOM":
             st_dicom()
         elif selected_option == "Volve Production":
