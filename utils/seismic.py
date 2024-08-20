@@ -7,7 +7,7 @@ def get_api_seismic() :
     try :
         print("Run get_api()")
         # Get the API
-        response = requests.post("http://localhost:8000/predict")
+        response = requests.post("https://demo-phe-seismic.azurewebsites.net/predict")
         if response.status_code == 200 :
             return response.json()
         else :

@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 st.title("Seismic Data Prediction")
 
 if st.button("Run Prediction"):
-    response = requests.post("http://localhost:8000/predict")
+    response = requests.post("https://demo-phe-seismic.azurewebsites.net/predict")
     if response.status_code == 200:
         result = response.json()
         tline = np.array(result["tline"])
