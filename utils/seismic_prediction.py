@@ -13,7 +13,7 @@ slice_type = st.selectbox(
 )
 
 if st.button("Run Prediction"):
-    response = requests.get(f"http://127.0.0.1:8000/prediction-result/?slice_type={slice_type}")
+    response = requests.get(f"https://demo-phe-seismic.azurewebsites.net/prediction-result/?slice_type={slice_type}")
     
     if response.status_code == 200:
         data = response.json()
