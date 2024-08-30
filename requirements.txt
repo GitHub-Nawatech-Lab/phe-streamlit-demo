@@ -4,4 +4,4 @@ seaborn
 scikit-learn
 pillow
 pybase64
-pip install Python-IO
+Python-IO
