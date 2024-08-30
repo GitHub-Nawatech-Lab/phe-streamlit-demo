@@ -51,10 +51,12 @@ def show_dicom(url, min_threshold, max_threshold, mid_threshold=None) :
         downsampling_factor = st.slider("Downsampling Factor", min_value=1, max_value=10, value=10)
         angle_style = st.slider("Angle", min_value=0, max_value=5, value=0)
 
-        # Process DICOM Series
-        response = get_api_dicom(url, downsampling_factor, angle_style, threshold)
-        if response is not None :
-            visualize_series(response)
+        if st.button("Run") :
+            # Process DICOM Series
+            response = get_api_dicom(url, downsampling_factor, angle_style, threshold)
+            if response is not None :
+                visualize_series(response)
+            print("DICOM Visualization Done!")
     except Exception as e :
         print("show_dicom() function get error :", e)
 
@@ -69,19 +71,19 @@ def st_dicom() :
         st.title("DICOM Image Visualization")
         st.markdown("### ✅ DICOM Visualization Nawatech - PHE")
 
+        ddr_trunc_url = "https://demo-phe-dicom.azurewebsites.net/process_dicom/ddr_truncate/"
         ddr_url = "https://demo-phe-dicom.azurewebsites.net/process_dicom/ddr/"
         lung_url = "https://demo-phe-dicom.azurewebsites.net/process_dicom/lung/"
         mri_url = "https://demo-phe-dicom.azurewebsites.net/process_dicom/mri/"
 
-        selected_option = st.selectbox("Select a DICOM Series", ["DDR", "Lung", "MRI"])
-        if selected_option == "DDR" :
+        selected_option = st.selectbox("Select a DICOM Series", ["DDR Truncated", "DDR", "Lung", "MRI"])
+        if selected_option == "DDR Truncated" :
+            show_dicom(ddr_trunc_url, 1985, 53970, 5177)
+        elif selected_option == "DDR" :
             show_dicom(ddr_url, 1985, 53970, 5177)
-            print("DICOM Visualization Done!")
         elif selected_option == "Lung" :
             show_dicom(lung_url, -1024, 3071, 500)
-            print("DICOM Visualization Done!")
         elif selected_option == "MRI" :
             show_dicom(mri_url, 0, 8847, 800)
-            print("DICOM Visualization Done!")
     except Exception as e :
         print("st_dicom() function get error :", e)
