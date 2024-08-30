@@ -2,3 +2,6 @@ streamlit
 matplotlib
 seaborn
 scikit-learn
+pillow
+pybase64
+Python-IO
