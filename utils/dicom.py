@@ -69,7 +69,8 @@ def st_dicom() :
         st.title("DICOM Image Visualization")
         st.markdown("### ✅ DICOM Visualization Nawatech - PHE")
 
-        ddr_url = "https://demo-phe-dicom.azurewebsites.net/process_dicom/ddr/"
+        # ddr_url = "https://demo-phe-dicom.azurewebsites.net/process_dicom/ddr/"
+        ddr_url = "https://demo-phe-dicom.azurewebsites.net/process_dicom/ddr_truncate/"
         lung_url = "https://demo-phe-dicom.azurewebsites.net/process_dicom/lung/"
         mri_url = "https://demo-phe-dicom.azurewebsites.net/process_dicom/mri/"
 
