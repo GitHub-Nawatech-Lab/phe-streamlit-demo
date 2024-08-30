@@ -8,7 +8,7 @@ def get_api_seismic(slice_type):
     try:
         print("Run get_api_seismic()")
         # Get the API with the selected slice_type
-        response = requests.get(f"http://http://20.6.74.118/:8000/prediction-result/?slice_type={slice_type}")
+        response = requests.get(f"http://20.6.74.118:8000/prediction-result/?slice_type={slice_type}")
         if response.status_code == 200:
             return response.json()
         else:
